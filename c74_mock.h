@@ -69,6 +69,7 @@
 #include "c74_mock_misc.h"
 #include "c74_mock_dictionary.h"
 #include "c74_mock_clock.h"
+#include "c74_mock_ui.h"
 
 // MSP
 #include "c74_mock_msp.h"
