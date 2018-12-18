@@ -180,6 +180,8 @@ namespace c74 {
 namespace max {
 	
 	using t_clock = mock::clock;
+	using t_timeobject = t_object;
+
 
 	MOCK_EXPORT t_clock* clock_new(void* obj, method fn) {
 		
@@ -196,6 +198,11 @@ namespace max {
 	
 	MOCK_EXPORT void clock_fdelay(t_clock* self, double duration_in_ms) {
 		self->add(std::chrono::milliseconds((int)duration_in_ms));
+	}
+
+
+	MOCK_EXPORT	double time_getms(t_timeobject *x) {
+		return 0;
 	}
 	
 		
