@@ -39,6 +39,18 @@ namespace c74 {
 		std::cout << msg;
 	}
 
+	MOCK_EXPORT void object_post(void*, const char* fmt, ...) {
+		char msg[2048 + 2];
+		va_list ap;
+
+		va_start(ap, fmt);
+		vsnprintf(msg, 2048, fmt, ap);
+		va_end(ap);
+		msg[2048] = '\0';
+		//printf(msg);
+		std::cout << msg;
+	}
+
 
 	MOCK_EXPORT void object_error(void*, const char* fmt, ...) {
 		char msg[2048 + 2];
