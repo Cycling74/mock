@@ -39,7 +39,7 @@ namespace c74 {
 		std::cout << msg;
 	}
 
-	MOCK_EXPORT void object_post(void*, const char* fmt, ...) {
+	MOCK_EXPORT void object_warn(void*, const char* fmt, ...) {
 		char msg[2048 + 2];
 		va_list ap;
 
