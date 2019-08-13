@@ -254,6 +254,7 @@ namespace max {
 		return 0;
 	}
 
+	MOCK_EXPORT t_jit_err max_jit_mop_notify(void *x, t_symbol *s, t_symbol *msg) { return 0; }
 	MOCK_EXPORT void max_jit_mop_assist(t_object*) {} // note: prototype wrong
 	MOCK_EXPORT int max_jit_mop_getoutputmode(t_object*) { return 0; }
 	MOCK_EXPORT void max_jit_mop_outputmatrix(t_object*) {}
