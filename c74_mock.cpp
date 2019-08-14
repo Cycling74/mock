@@ -49,6 +49,9 @@ namespace max {
 	}
 
 
+	MOCK_EXPORT void binbuf_insert(void *x, t_symbol *s, short argc, t_atom *argv) {}
+
+
 	MOCK_EXPORT short locatefile_extended(char* name, short* outvol, t_fourcc* outtype, const t_fourcc* filetypelist, short numtypes) {
 		return 0;
 	}
@@ -89,7 +92,11 @@ namespace max {
 	MOCK_EXPORT t_max_err object_attr_touch(t_object* x, t_symbol* attrname) {
 		return 0;
 	}
-	
+
+	MOCK_EXPORT t_max_err object_attr_getvalueof(t_object* x, t_symbol* s, long* argc, t_atom** argv) {
+		return 0;
+	}
+
 	MOCK_EXPORT t_max_err object_attr_setvalueof(t_object* x, t_symbol* s, long argc, const t_atom* argv) {
 		return 0;
 	}
