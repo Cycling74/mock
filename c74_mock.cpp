@@ -8,6 +8,7 @@
 namespace c74 {
 namespace max {
 	struct t_qelem;
+  static t_object	mock_object;
 
 	MOCK_EXPORT t_qelem* qelem_new(void* obj, method fn) {
 		return nullptr;
@@ -135,6 +136,11 @@ namespace max {
 	MOCK_EXPORT t_object* object_new_imp(void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 		return nullptr;
 	}
+
+  MOCK_EXPORT t_max_err object_obex_lookup(void *x, t_symbol *key, t_object **val) {
+    *val = &mock_object;
+    return 0;
+  }
 
 	using t_jit_object = t_object;
 	using t_jit_err = long;
