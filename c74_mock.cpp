@@ -5,11 +5,6 @@
 
 #include "c74_mock.h"
 
-
-
-
-
-
 namespace c74 {
 namespace max {
 	struct t_qelem;
@@ -26,7 +21,6 @@ namespace max {
 		;
 	}
 
-
 	MOCK_EXPORT short systhread_ismainthread(void) {
 		return true;
 	}
@@ -39,7 +33,6 @@ namespace max {
 		return nullptr;
 	}
 
-
 	MOCK_EXPORT float sys_getsr(void) {
 		return 44100;
 	}
@@ -48,9 +41,7 @@ namespace max {
 		return 32;
 	}
 
-
 	MOCK_EXPORT void binbuf_insert(void *x, t_symbol *s, short argc, t_atom *argv) {}
-
 
 	MOCK_EXPORT short locatefile_extended(char* name, short* outvol, t_fourcc* outtype, const t_fourcc* filetypelist, short numtypes) {
 		return 0;
@@ -58,11 +49,9 @@ namespace max {
 
 	MOCK_EXPORT void typelist_make(t_fourcc *types, long include, short *numtypes) {}
 
-
 	MOCK_EXPORT short path_getpath(short path, const char *name, short *outpath) {
 		return 0;
 	}
-
 
 	MOCK_EXPORT short path_createfolder(const short path, const char* name, short* newpath) {
 		return 0;
@@ -105,23 +94,19 @@ namespace max {
 		return 0;
 	}
 
-	
 	MOCK_EXPORT t_object* attr_offset_new(const char* name, const t_symbol* type, long flags, const method mget, const method mset, long offset) {
 		return nullptr;
 	}
-	
+
 	MOCK_EXPORT t_object* attr_offset_array_new(const char* name, t_symbol* type, long size, long flags, method mget, method mset, long offset_count, long offset) {
 		return nullptr;
 	}
-
-	
 
 	MOCK_EXPORT void attr_args_process(void* x, short ac, t_atom* av) {}
 
 	MOCK_EXPORT long attr_args_offset(short ac, t_atom* av) {
 		return 0;
 	}
-
 
 	MOCK_EXPORT void attr_dictionary_process(void* x, t_dictionary* d) {}
 
@@ -131,8 +116,6 @@ namespace max {
 		return nullptr;
 	}
 
-
-
 	MOCK_EXPORT method object_getmethod(void* x, t_symbol* s) {
 		return nullptr;
 	}
@@ -141,55 +124,45 @@ namespace max {
 		return nullptr;
 	}
 
-
 	MOCK_EXPORT t_max_err object_attach_byptr_register(void* x, void* object_to_attach, const t_symbol* reg_name_space) {
 		return 0;
 	}
-
 
 	MOCK_EXPORT t_max_err object_retain(t_object*) {
 		return 0;
 	}
 
-	
 	MOCK_EXPORT t_object* object_new_imp(void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 		return nullptr;
 	}
-	
-	
+
 	using t_jit_object = t_object;
 	using t_jit_err = long;
-	
+
 	MOCK_EXPORT t_jit_object* jit_object_new_imp(void* classname, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* dummy) {
 		return object_new_imp(classname, p1, p2, p3, p4, p5, p6, p7, p8, dummy);
 	}
 
-	
 	MOCK_EXPORT t_jit_err jit_class_addadornment(void* c, t_jit_object* o) {
 		return 0;
 	}
 
-	
 	MOCK_EXPORT t_jit_err jit_class_addmethod(void* c, method m, const char* name, ...) {
 		return 0;
 	}
-
 
 	MOCK_EXPORT t_jit_err jit_class_register(void* c) {
 		return 0;
 	}
 
-	
 	MOCK_EXPORT t_jit_err jit_class_addattr(void* c, t_jit_object* attr) {
 		return 0;
 	}
 
-	
 	MOCK_EXPORT t_max_err object_addattr_parse(t_object* x, const char* attrname, t_symbol* type, long flags, const char* parsestr) {
 		return 0;
 	}
 
-	
 	MOCK_EXPORT t_max_err class_attr_addattr_parse(t_class* c, const char* attrname, const char* attrname2, t_symbol* type, long flags, const char* parsestr) {
 		return 0;
 	}
@@ -197,7 +170,6 @@ namespace max {
 	MOCK_EXPORT t_max_err class_attr_addattr_format(t_class* c, const char* attrname, const char* attrname2, const t_symbol* type, long flags, const char* fmt, ...) {
 		return 0;
 	}
-
 
 	MOCK_EXPORT t_max_err class_attr_addattr_atoms(t_class* c, const char* attrname, const char* attrname2, t_symbol* type, long flags, long ac, t_atom* av) {
 		return 0;
@@ -207,52 +179,46 @@ namespace max {
 		return;
 	}
 
-
 	MOCK_EXPORT t_max_err class_addtypedwrapper(t_class *x, method m, const char *name, ...) {
 		return 0;
 	}
 
-
-
-
-
 	using t_jbox = t_object;
 
-
 	MOCK_EXPORT void jbox_ready(t_jbox* b) {}
-
-
-
-
-
-
-
 
 	MOCK_EXPORT void max_jit_obex_gimmeback_dumpout(void *x, t_symbol *s, long ac, t_atom *av) {
 		return;
 	}
 
-
-	
 	MOCK_EXPORT void *max_jit_object_alloc(t_class *mclass, t_symbol *jitter_classname) {
 		return nullptr;
 	}
-	
+
 	MOCK_EXPORT void max_jit_object_free(void *x) {}
+
 	MOCK_EXPORT void max_jit_class_obex_setup(t_class *mclass, long oboffset) {}
+
 	MOCK_EXPORT t_jit_err max_jit_class_addattr(t_class *mclass, void *attr) {
 		return 0;
 	}
+
 	MOCK_EXPORT void max_jit_class_wrap_standard(t_class *mclass, t_class *jclass, long flags) {}
+
 	MOCK_EXPORT void max_jit_class_wrap_addmethods(t_class *mclass, t_class *jclass) {}
+
 	MOCK_EXPORT void max_jit_class_wrap_addmethods_flags(t_class *mclass, t_class *jclass, long flags) {}
+
 	MOCK_EXPORT void max_jit_class_wrap_attrlist2methods(t_class *mclass, t_class *jclass) {}
+
 	MOCK_EXPORT void max_jit_class_addmethod_defer(t_class *mclass, method m, const char *s) {}
+
 	MOCK_EXPORT void max_jit_class_addmethod_defer_low(t_class *mclass, method m, const char *s) {}
+
 	MOCK_EXPORT void max_jit_class_addmethod_usurp(t_class *mclass, method m, const char *s) {}
+
 	MOCK_EXPORT void max_jit_class_addmethod_usurp_low(t_class *mclass, method m, const char *s) {}
-	
-	
+
 	MOCK_EXPORT t_jit_err max_jit_class_mop_wrap(t_class* mclass, t_class* jclass, long flags) {
 		return 0;
 	}
@@ -262,17 +228,24 @@ namespace max {
 	}
 
 	MOCK_EXPORT t_jit_err max_jit_mop_notify(void *x, t_symbol *s, t_symbol *msg) { return 0; }
-	MOCK_EXPORT void max_jit_mop_assist(t_object*) {} // note: prototype wrong
-	MOCK_EXPORT int max_jit_mop_getoutputmode(t_object*) { return 0; }
-	MOCK_EXPORT void max_jit_mop_outputmatrix(t_object*) {}
-	MOCK_EXPORT void max_jit_mop_free(t_object*) {}
-	MOCK_EXPORT void* max_jit_obex_jitob_get(t_object*) { return nullptr; }
-	MOCK_EXPORT void* max_jit_obex_adornment_get(t_object* self, t_symbol* name) { return nullptr; }
-	MOCK_EXPORT void max_jit_attr_args(t_object*, long argc, t_atom* argv) {}
-	MOCK_EXPORT void* jit_object_alloc(t_class* c) { return object_alloc(c); }
-	MOCK_EXPORT void jit_object_free(t_object* x) { object_free(x); }
-	
 
+	MOCK_EXPORT void max_jit_mop_assist(t_object*) {} // note: prototype wrong
+
+	MOCK_EXPORT int max_jit_mop_getoutputmode(t_object*) { return 0; }
+
+	MOCK_EXPORT void max_jit_mop_outputmatrix(t_object*) {}
+
+	MOCK_EXPORT void max_jit_mop_free(t_object*) {}
+
+	MOCK_EXPORT void* max_jit_obex_jitob_get(t_object*) { return nullptr; }
+
+	MOCK_EXPORT void* max_jit_obex_adornment_get(t_object* self, t_symbol* name) { return nullptr; }
+
+	MOCK_EXPORT void max_jit_attr_args(t_object*, long argc, t_atom* argv) {}
+
+	MOCK_EXPORT void* jit_object_alloc(t_class* c) { return object_alloc(c); }
+
+	MOCK_EXPORT void jit_object_free(t_object* x) { object_free(x); }
 
 #ifdef __APPLE__
 	#pragma clang diagnostic push
@@ -305,4 +278,3 @@ namespace max {
 	#endif
 
 }}
-
