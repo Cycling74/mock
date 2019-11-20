@@ -208,7 +208,7 @@ public:
 	/**	Call the perform methods for every object in the chain. */
 	void tick()
 	{
-		for_each(m_chainitems.begin(), m_chainitems.end(), std::mem_fun_ref(&t_mock_dspchain_item::tick));
+		for_each(m_chainitems.begin(), m_chainitems.end(), std::mem_fn(&t_mock_dspchain_item::tick));
 	}
 };
 
