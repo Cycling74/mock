@@ -152,6 +152,14 @@ namespace max {
     }
 
 
+// Atom Arrays
+
+    struct t_atomarray;
+
+    MOCK_EXPORT t_atomarray* atomarray_new(long ac, t_atom* av) { return nullptr; }
+    MOCK_EXPORT void atomarray_appendatom(t_atomarray* x, t_atom* a) {};
+
+
 
 // Special stuff for the mocked testing environment
 

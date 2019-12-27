@@ -63,5 +63,9 @@ namespace c74 {
         //printf(msg);
         std::cerr << msg;
     }
-}
 
+    MOCK_EXPORT void fileusage_addpackage(void *w, const char *name, void *subfoldernames) {}
+
+
+
+}
