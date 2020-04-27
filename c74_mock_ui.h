@@ -11,6 +11,14 @@ namespace max {
 
     using t_jbox = t_object;
     using t_pxjbox = t_jbox;
+    
+    struct t_rect {
+		double x;         ///< The horizontal origin
+		double y;         ///< The vertical origin
+		double width;     ///< The width
+		double height;    ///< The height
+	};
+
 
 
     MOCK_EXPORT void class_dspinitjbox(t_class* c) {}
@@ -24,5 +32,15 @@ namespace max {
     MOCK_EXPORT t_max_err jbox_notify(t_jbox* b, t_symbol* s, t_symbol* msg, void* sender, void* data) {
         return 0;
     }
+
+    MOCK_EXPORT t_max_err jbox_get_rect_for_view(t_object* box, t_object* patcherview, t_rect* rect) {
+		return 0;
+    }
+
+    MOCK_EXPORT t_object* patcherview_get_jgraphics(t_object* pv) {
+		return nullptr;
+    }
+
+
 
 }}
