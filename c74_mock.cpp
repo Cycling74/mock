@@ -203,6 +203,10 @@ namespace max {
         return 0;
     }
 
+    MOCK_EXPORT t_max_err class_attr_get(t_class* x, t_symbol* attrname) {
+        return 0;
+    }
+
     MOCK_EXPORT void class_time_addattr(t_class *c, char *attrname, char *attrlabel, long flags) {
         return;
     }
