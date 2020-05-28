@@ -219,7 +219,10 @@ namespace max {
     using t_jbox = t_object;
 
 
+    MOCK_EXPORT t_max_err jbox_new(t_jbox* b, long flags, long argc, t_atom* argv) { return 0; }
+    MOCK_EXPORT void jbox_free(t_jbox *b) {}
     MOCK_EXPORT void jbox_ready(t_jbox* b) {}
+    MOCK_EXPORT void jbox_initclass(t_jbox* b) {}
 
 
 
