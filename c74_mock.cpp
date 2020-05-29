@@ -227,6 +227,7 @@ namespace max {
     MOCK_EXPORT void jbox_free(t_jbox *b) {}
     MOCK_EXPORT void jbox_ready(t_jbox* b) {}
     MOCK_EXPORT void jbox_initclass(t_jbox* b) {}
+    MOCK_EXPORT void jbox_redraw(t_jbox* b) {}
 
 
     using t_jgraphics = t_object;
