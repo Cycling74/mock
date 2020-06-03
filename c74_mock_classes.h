@@ -83,9 +83,7 @@ MOCK_EXPORT t_symbol *object_classname(t_object *x);
                     messlist at index -1 there will be problems as this messlist is a hashtab and not an array.
                     The code for this function and object_classname() should make be self-evident for how to accomplish this using the mock t_class.
  */
-MOCK_EXPORT t_class* class_new(const char* name, const method mnew, const method mfree, long size, const method mmenu, short type, ...)
-//inline t_class *class_new(C74_CONST char *name, C74_CONST method mnew, C74_CONST method mfree, long size, C74_CONST method mmenu, short type, ...)
-{
+MOCK_EXPORT t_class* class_new(const char* name, const method mnew, const method mfree, long size, const method mmenu, short type, ...) {
     t_class			*c = new t_class;
     t_mock_messlist	*mock_messlist = new t_mock_messlist;
 

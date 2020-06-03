@@ -116,9 +116,9 @@ namespace max {
 
 
 
-    MOCK_EXPORT void attr_args_process(void* x, short ac, t_atom* av) {}
+    MOCK_EXPORT void attr_args_process(void* x, const short ac, const t_atom* av) {}
 
-    MOCK_EXPORT long attr_args_offset(short ac, t_atom* av) {
+    MOCK_EXPORT long attr_args_offset(const short ac, const t_atom* av) {
         return 0;
     }
 
@@ -127,7 +127,7 @@ namespace max {
 
     MOCK_EXPORT void attr_dictionary_check(void* x, t_dictionary* d) {}
 
-    MOCK_EXPORT t_dictionary* object_dictionaryarg(long ac, t_atom* av) {
+    MOCK_EXPORT t_dictionary* object_dictionaryarg(const long ac, const t_atom* av) {
         return nullptr;
     }
 
