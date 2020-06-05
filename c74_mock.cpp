@@ -231,7 +231,9 @@ namespace max {
 
 
     using t_jgraphics = t_object;
+    using t_jgraphics_format = int;
     struct t_jrgba;
+    struct t_jsurface;
 
     MOCK_EXPORT void jgraphics_set_line_width(t_jgraphics* g, double width) {}
     MOCK_EXPORT void jgraphics_line_to(t_jgraphics* g, double x, double y) {}
@@ -241,6 +243,7 @@ namespace max {
     MOCK_EXPORT void jgraphics_fill(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_stroke(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_set_source_jrgba(t_jgraphics* g, t_jrgba* rgba) {}
+    MOCK_EXPORT t_jsurface* jgraphics_image_surface_create(t_jgraphics_format format, int width, int height) {}
 
 
 
