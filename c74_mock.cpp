@@ -244,6 +244,7 @@ namespace max {
     MOCK_EXPORT void jgraphics_stroke(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_set_source_jrgba(t_jgraphics* g, t_jrgba* rgba) {}
     MOCK_EXPORT t_jsurface* jgraphics_image_surface_create(t_jgraphics_format format, int width, int height) {}
+    MOCK_EXPORT void jgraphics_surface_destroy(const t_jsurface* surface) {}
 
 
 
