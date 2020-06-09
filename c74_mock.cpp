@@ -243,12 +243,24 @@ namespace max {
     MOCK_EXPORT void jgraphics_fill(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_stroke(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_set_source_jrgba(t_jgraphics* g, t_jrgba* rgba) {}
-    MOCK_EXPORT t_jsurface* jgraphics_image_surface_create(t_jgraphics_format format, int width, int height) {}
+    MOCK_EXPORT t_jsurface* jgraphics_image_surface_create(t_jgraphics_format format, int width, int height) {
+		return nullptr;
+    }
     MOCK_EXPORT void jgraphics_surface_destroy(const t_jsurface* surface) {}
 
+     MOCK_EXPORT unsigned char* jgraphics_image_surface_lockpixels(
+		t_jsurface* s, int x, int y, int width, int height, int* linestride, int* pixelstride) {
+		return nullptr;
+	}
 
+	MOCK_EXPORT void jgraphics_image_surface_unlockpixels(t_jsurface* s, unsigned char* data) {}
 
+	MOCK_EXPORT void jgraphics_image_surface_draw(t_jgraphics* g, t_jsurface* s, t_rect srcRect, t_rect destRect) { }
 
+    MOCK_EXPORT void jgraphics_image_surface_clear(t_jsurface* s, int x, int y, int width, int height) { }
+
+    MOCK_EXPORT t_jgraphics* jgraphics_create(t_jsurface* target) { return nullptr; }
+    MOCK_EXPORT void jgraphics_destroy(t_jgraphics* g) { }
 
 
     MOCK_EXPORT void max_jit_obex_gimmeback_dumpout(void *x, t_symbol *s, long ac, t_atom *av) {
