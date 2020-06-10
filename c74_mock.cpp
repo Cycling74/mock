@@ -262,6 +262,10 @@ namespace max {
     MOCK_EXPORT t_jgraphics* jgraphics_create(t_jsurface* target) { return nullptr; }
     MOCK_EXPORT void jgraphics_destroy(t_jgraphics* g) { }
 
+    MOCK_EXPORT t_max_err jbox_invalidate_layer(t_object* b, t_object* view, t_symbol* name) { return 0; }
+    MOCK_EXPORT t_jgraphics* jbox_start_layer(t_object* b, t_object* view, t_symbol* name, double width, double height) { return nullptr; }
+    MOCK_EXPORT t_max_err jbox_end_layer(t_object* b, t_object* view, t_symbol* name) { return 0; }
+    MOCK_EXPORT t_max_err jbox_paint_layer(t_object* b, t_object* view, t_symbol* name, double x, double y) { return 0; }
 
     MOCK_EXPORT void max_jit_obex_gimmeback_dumpout(void *x, t_symbol *s, long ac, t_atom *av) {
         return;
