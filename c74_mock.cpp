@@ -216,6 +216,9 @@ namespace max {
         return 0;
     }
 
+    MOCK_EXPORT t_max_err class_parameter_register_default_color(t_class* c, t_symbol* attrname, t_symbol* colorname) {
+        return 0;
+    }
 
 
 
