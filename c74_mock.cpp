@@ -220,6 +220,9 @@ namespace max {
         return 0;
     }
 
+    MOCK_EXPORT t_max_err object_parameter_color_get(t_object* x, t_symbol* s, t_jrgba* rgba) { 
+        return 0;
+    }
 
 
 

@@ -19,6 +19,12 @@ namespace max {
 		double height;    ///< The height
 	};
 
+    struct t_jrgba {
+		double red;      ///< Red component in the range [0.0, 1.0]
+		double green;    ///< Green component in the range [0.0, 1.0]
+		double blue;
+		double alpha;    ///< Alpha (transparency) component in the range [0.0, 1.0]
+	};
 
 
     MOCK_EXPORT void class_dspinitjbox(t_class* c) {}
