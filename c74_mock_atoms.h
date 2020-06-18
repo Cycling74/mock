@@ -143,7 +143,7 @@ namespace max {
     static const int ATOM_GETTEXT_DEFAULT_SIZE = 64;		// a reasonable start?
     static const int ATOM_GETTEXT_MAX_NUM_SIZE = 1024;
 
-    MOCK_EXPORT t_max_err atom_gettext(long ac, t_atom *av, long *textsize, char **text, long flags)
+    MOCK_EXPORT t_max_err atom_gettext(long ac, t_atom *av, long *textsize, const char **text, long flags)
     {
         // TODO: return something reasonable?  Strip out all usage?  Use code from kernel?
         *text = "";
