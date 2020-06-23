@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <atomic>
+
 using namespace std::chrono_literals;
 
 namespace c74 {
@@ -57,16 +59,24 @@ namespace mock {
 
 
     public:
-        clock(max::method a_callback, void* a_baton)
-        : meth(a_callback)
-        , baton(a_baton)
-        {}
+		clock(max::method a_callback, void* a_baton)
+		: meth(a_callback)
+		, baton(a_baton) {
+			run_thread.test_and_set();
+        }
 
         ~clock() {
-            t.join();
+			unset();
         }
 
         // TODO: mark class as not copyable?
+
+        void unset() {
+			run_thread.clear();
+			if (t.joinable()) {
+				t.join();
+            }
+        }
 
         auto time(clock_type onset) {
             return std::chrono::duration_cast<std::chrono::milliseconds>(onset - started_at).count();
@@ -77,7 +87,7 @@ namespace mock {
         }
 
         void tick() {
-            while (true) {
+			while (run_thread.test_and_set()) {
 #ifdef WIN_VERSION
                 // On Windows an exception will be thrown when we try to lock the mutex wihout some sort of time passage
                 // (either a console post or an explicit short delay)
@@ -168,6 +178,7 @@ namespace mock {
         std::multiset<event>	events;	// using multiset instead of vector because we want to keep it sorted, performance impacts?
         std::condition_variable	cv;
         std::vector<event>		new_events;
+		std::atomic_flag        run_thread;
 
         max::method				meth;
         void*					baton;
@@ -193,6 +204,7 @@ namespace max {
 
     MOCK_EXPORT void clock_unset(t_clock* self) {
         // TODO: implement
+		self->unset();
     }
 
 
