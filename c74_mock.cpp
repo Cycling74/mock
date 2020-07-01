@@ -265,6 +265,9 @@ namespace max {
 
     MOCK_EXPORT void jgraphics_image_surface_clear(t_jsurface* s, int x, int y, int width, int height) { }
 
+    MOCK_EXPORT int jgraphics_image_surface_get_width(t_jsurface* s) { return 0; }
+    MOCK_EXPORT int jgraphics_image_surface_get_height(t_jsurface* s) { return 0; }
+
     MOCK_EXPORT t_jgraphics* jgraphics_create(t_jsurface* target) { return nullptr; }
     MOCK_EXPORT void jgraphics_destroy(t_jgraphics* g) { }
 
