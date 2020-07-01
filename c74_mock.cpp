@@ -246,6 +246,7 @@ namespace max {
     MOCK_EXPORT void jgraphics_line_draw_fast(t_jgraphics* g, double x1, double y1, double x2, double y2, double linewidth) {}
     MOCK_EXPORT void jgraphics_move_to(t_jgraphics* g, double x, double y) {}
     MOCK_EXPORT void jgraphics_rectangle_rounded(t_jgraphics* g, double x, double y, double width, double height, double ovalwidth, double ovalheight) {}
+    MOCK_EXPORT void jgraphics_rectangle_fill_fast(t_jgraphics* g, double x, double y, double width, double height) {}
     MOCK_EXPORT void jgraphics_fill(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_stroke(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_set_source_jrgba(t_jgraphics* g, t_jrgba* rgba) {}
