@@ -66,16 +66,17 @@ namespace mock {
         }
 
         ~clock() {
-			unset();
+			run_thread.clear();
+			if (t.joinable()) {
+				t.join();
+            }
         }
 
         // TODO: mark class as not copyable?
 
         void unset() {
-			run_thread.clear();
-			if (t.joinable()) {
-				t.join();
-            }
+            lock l(mutex);
+            new_events.clear();
         }
 
         auto time(clock_type onset) {
