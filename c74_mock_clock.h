@@ -75,8 +75,14 @@ namespace mock {
         // TODO: mark class as not copyable?
 
         void unset() {
-            lock l(mutex);
-            new_events.clear();
+            {
+                lock l(scheduled_events_mutex);
+                scheduled_events.clear();
+            }
+            {
+                lock l(pending_events_mutex);
+                pending_events.clear();
+            }
         }
 
         auto time(clock_type onset) {
@@ -90,56 +96,49 @@ namespace mock {
         void tick() {
 			while (run_thread.test_and_set()) {
 #ifdef WIN_VERSION
-                // On Windows an exception will be thrown when we try to lock the mutex wihout some sort of time passage
-                // (either a console post or an explicit short delay)
-                // std::cout << c74::mock::clock::tick()" << std::endl;
-                std::this_thread::sleep_for(1ms);
+				// On Windows an exception will be thrown when we try to lock the mutex wihout some sort of time passage
+				// (either a console post or an explicit short delay)
+				// std::cout << c74::mock::clock::tick()" << std::endl;
+				std::this_thread::sleep_for(1ms);
 #endif
-                std::vector<event>				events_to_run;
-                std::unique_lock<std::mutex>	lock(mutex);	// locks mutex immediately, guarantees unlock on dtor
+				std::unique_lock<std::mutex> pending_lock(pending_events_mutex);
+				std::unique_lock<std::mutex> scheduled_lock(scheduled_events_mutex);
 
-                // update list of events
-                for (auto &e : new_events)
-                    events.insert(e);
-                new_events.clear();
+				// update list of events
+				for (auto &e : pending_events)
+					scheduled_events.insert(e);
+				pending_events.clear();
 
-                // service the list of events
-                {
-                    lock.unlock();	// only protecting new_events, and we don't want to call into user code below from within the lock!
-                    for (auto& e : events) {
-                        if (e > now()) {
-                            //std::cout << time(now()) << " (all remaining events in the future)" << std::endl;
-                            break;
-                        }
-                        //std::cout << time(now()) << " (event to run)" << std::endl;
-                        events_to_run.push_back(e);
-                        e();
-                    }
+				// User code can add new events, so don't lock pending_events
+				// while calling the scheduled events!
+				pending_lock.unlock();
 
-                    // purge events that have run
-                    for (auto& e : events_to_run)
-                        events.erase(e);
+				std::vector<event> events_that_ran;
+				for (auto& e : scheduled_events) {
+					if (e > now()) {
+						//std::cout << time(now()) << " (all remaining events in the future)" << std::endl;
+						break;
+					}
+					//std::cout << time(now()) << " (event to run)" << std::endl;
+					events_that_ran.push_back(e);
+					e();
+				}
 
-                    lock.lock(); // need to re-lock before accessing new_events and cv
-                }
+				// purge events that have run
+				for (auto& e : events_that_ran)
+					scheduled_events.erase(e);
 
-                // events themselves may have added new (pending) events
-                for (auto &e : new_events)
-                    events.insert(e);
-                new_events.clear();
 
-                // decide when to run again
-                if (!events.empty()) {
-                    auto& e = *events.begin();
-                    auto next = e.onset();
-                    //std::cout << time(now()) << " SLEEP UNTIL " << time(next) << std::endl;
-                    cv.wait_until(lock, next);
-                }
-                else {
-                    //std::cout << time(now()) << " SLEEP FOREVER!" << std::endl;
-                    cv.wait_until(lock, now()+1h);
-                }
-            }
+				// events themselves may have added new (pending) events
+				pending_lock.lock();
+				for (auto &e : pending_events)
+					scheduled_events.insert(e);
+				pending_events.clear();
+        
+				const auto next = scheduled_events.empty() ? now()+1h : scheduled_events.begin()->onset();
+				scheduled_lock.unlock(); // we're not touching any scheduled events anymore. Unlock the scheduled_events_mutex.
+				cv.wait_until(pending_lock, next);
+			}
         }
 
         void add(const std::chrono::milliseconds delay/*, function meth*/) {
@@ -152,8 +151,8 @@ namespace mock {
             // but if the tick thread was adding an event simultaneously to another thread then the content of new_events would be undefined, so we need to lock it for all writing.
             // the deadlock was occurring because the tick() method was calling into user code while locked, and the user code (in the metro case) was adding new events.
 
-            lock l(mutex);
-            new_events.push_back(event);
+            lock l(pending_events_mutex);
+            pending_events.push_back(event);
             cv.notify_one();
         }
 
@@ -175,10 +174,11 @@ namespace mock {
     private:
         clock_type				started_at = { std::chrono::steady_clock::now() };
         std::thread				t { &clock::tick, this };
-        std::mutex				mutex;
-        std::multiset<event>	events;	// using multiset instead of vector because we want to keep it sorted, performance impacts?
+        std::mutex				pending_events_mutex; // mutex that must be locked when accessing pending_events
+        std::vector<event>		pending_events;
+        std::mutex				scheduled_events_mutex; // mutex that must be locked when accessing scheduled_events
+        std::multiset<event>	scheduled_events;	// using multiset instead of vector because we want to keep it sorted, performance impacts?
         std::condition_variable	cv;
-        std::vector<event>		new_events;
 		std::atomic_flag        run_thread;
 
         max::method				meth;
