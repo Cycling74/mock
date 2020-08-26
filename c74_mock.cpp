@@ -127,6 +127,18 @@ namespace max {
 
     MOCK_EXPORT void attr_dictionary_check(void* x, t_dictionary* d) {}
 
+    MOCK_EXPORT t_object* attribute_new_parse(const char* attrname, t_symbol* type, long flags, const char* parsestr) {
+        return nullptr;
+    }
+
+    MOCK_EXPORT t_max_err class_sticky(t_class* x, t_symbol* stickyname, t_symbol* s, t_object* o) {
+        return 0;
+    }
+
+    MOCK_EXPORT t_max_err class_sticky_clear(t_class* x, t_symbol* stickyname, t_symbol* s) {
+        return 0;
+    }
+
     MOCK_EXPORT t_dictionary* object_dictionaryarg(const long ac, const t_atom* av) {
         return nullptr;
     }
