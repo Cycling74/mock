@@ -250,14 +250,19 @@ namespace max {
 
     using t_jgraphics = t_object;
     using t_jgraphics_format = int;
+    using t_jgraphics_line_join = int;
+    using t_jgraphics_line_cap = int;
     struct t_jrgba;
     struct t_jsurface;
 
+    MOCK_EXPORT void jgraphics_set_line_cap(t_jgraphics* g, t_jgraphics_line_cap line_cap) {}
+    MOCK_EXPORT void jgraphics_set_line_join(t_jgraphics* g, t_jgraphics_line_join line_join) {}
     MOCK_EXPORT void jgraphics_set_line_width(t_jgraphics* g, double width) {}
     MOCK_EXPORT void jgraphics_line_to(t_jgraphics* g, double x, double y) {}
     MOCK_EXPORT void jgraphics_line_draw_fast(t_jgraphics* g, double x1, double y1, double x2, double y2, double linewidth) {}
     MOCK_EXPORT void jgraphics_move_to(t_jgraphics* g, double x, double y) {}
     MOCK_EXPORT void jgraphics_rectangle_rounded(t_jgraphics* g, double x, double y, double width, double height, double ovalwidth, double ovalheight) {}
+    MOCK_EXPORT void jgraphics_ellipse(t_jgraphics* g, double x, double y, double width, double height) {}
     MOCK_EXPORT void jgraphics_rectangle_fill_fast(t_jgraphics* g, double x, double y, double width, double height) {}
     MOCK_EXPORT void jgraphics_fill(t_jgraphics* g) {}
     MOCK_EXPORT void jgraphics_stroke(t_jgraphics* g) {}
