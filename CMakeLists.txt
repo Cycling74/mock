@@ -13,7 +13,6 @@ project(mock_kernel)
 
 include_directories(
 	"${C74_MIN_API_DIR}/max-api/include"
-	"."
 )
 
 
