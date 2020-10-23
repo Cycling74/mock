@@ -6,36 +6,28 @@ cmake_minimum_required(VERSION 3.0)
 set(C74_MOCK_TARGET_DIR "${CMAKE_BINARY_DIR}/tests")
 set(C74_MIN_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
-#############################################################
 project(mock_kernel)
-#############################################################
-
 
 include_directories(
 	"${C74_MIN_API_DIR}/max-api/include"
 )
 
-
-if (WIN32)
+if(WIN32)
 	add_definitions(
 		-DWIN_VERSION
 		-D_USE_MATH_DEFINES
 		-D_CRT_SECURE_NO_WARNINGS
 	)
-endif ()
-
-
-if (APPLE)
+elseif(APPLE)
 	set(CMAKE_OSX_ARCHITECTURES x86_64)
 	set(CMAKE_MACOSX_RPATH 1)
-endif ()
-
+endif()
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${C74_MOCK_TARGET_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${C74_MOCK_TARGET_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${C74_MOCK_TARGET_DIR}")
 
-if (WIN32)
+if(WIN32)
 	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${C74_MOCK_TARGET_DIR}")
@@ -45,7 +37,7 @@ if (WIN32)
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${C74_MOCK_TARGET_DIR}")
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG "${C74_MOCK_TARGET_DIR}")
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${C74_MOCK_TARGET_DIR}")
-endif ()
+endif()
 
 add_library(
 	${PROJECT_NAME}
@@ -53,9 +45,9 @@ add_library(
 	c74_mock.cpp
 )
 
-
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
-if (WIN32)
+
+if(WIN32)
 	set_property(TARGET ${PROJECT_NAME} PROPERTY LINK_FLAGS  "/ignore:4197")
 endif()
