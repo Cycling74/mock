@@ -26,7 +26,6 @@ endif ()
 
 
 if (APPLE)
-	#set(CMAKE_OSX_ARCHITECTURES x86_64;i386)
 	set(CMAKE_OSX_ARCHITECTURES x86_64)
 	set(CMAKE_MACOSX_RPATH 1)
 endif ()
@@ -58,6 +57,5 @@ add_library(
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 if (WIN32)
-#	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/ignore:4099")
 	set_property(TARGET ${PROJECT_NAME} PROPERTY LINK_FLAGS  "/ignore:4197")
 endif()
