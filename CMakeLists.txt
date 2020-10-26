@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-set(C74_MOCK_TARGET_DIR "${CMAKE_BINARY_DIR}/test")
+set(C74_MOCK_TARGET_DIR "${CMAKE_BINARY_DIR}")
 set(C74_MIN_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../min-api)
 
 #############################################################
@@ -11,7 +11,7 @@ project(mock_kernel)
 #############################################################
 
 
-include_directories(
+include_directories( 
 	"${C74_MIN_API_DIR}/max-api/include"
 	"."
 )
@@ -49,8 +49,8 @@ if (WIN32)
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 endif ()
 
-add_library(
-	${PROJECT_NAME}
+add_library( 
+	${PROJECT_NAME} 
 	SHARED
 	c74_mock.cpp
 )
