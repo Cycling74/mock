@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-set(C74_MOCK_TARGET_DIR "${CMAKE_BINARY_DIR}/tests")
+set(C74_MOCK_TARGET_DIR "${CMAKE_BINARY_DIR}/test")
 set(C74_MIN_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../min-api)
 
 #############################################################
