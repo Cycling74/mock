@@ -3,9 +3,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../min-api-unittest.cmake")
-	set(C74_MOCK_TARGET_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../tests)
-else ()
+if (NOT DEFINED C74_MOCK_TARGET_DIR)
 	set(C74_MOCK_TARGET_DIR .)
 endif ()
 set(C74_MIN_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../min-api)
