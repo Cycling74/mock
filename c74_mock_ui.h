@@ -47,6 +47,10 @@ namespace max {
 		return nullptr;
     }
 
+    using t_jmouse_cursortype = int;
+
+    MOCK_EXPORT void jmouse_setcursor(t_object* patcherview, t_object* box, t_jmouse_cursortype type) {}
+    MOCK_EXPORT void jmouse_setposition_box(t_object* patcherview, t_object* box, double bx, double by) {}
 
 
 }}
