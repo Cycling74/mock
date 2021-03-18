@@ -26,6 +26,7 @@ namespace max {
         ;
     }
 
+    MOCK_EXPORT void* scheduler_fromobject(t_object* x) { return nullptr; }
 
     MOCK_EXPORT short systhread_ismainthread(void) {
         return true;
@@ -168,6 +169,7 @@ namespace max {
         return nullptr;
     }
 
+    MOCK_EXPORT t_max_err object_obex_storeflags(void *x,t_symbol *key, t_object *val, long flags) { return 0; }
 
     using t_jit_object = t_object;
     using t_jit_err = long;
