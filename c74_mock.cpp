@@ -26,6 +26,8 @@ namespace max {
         ;
     }
 
+    MOCK_EXPORT void qelem_unset(t_qelem* q) {}
+
     MOCK_EXPORT void* scheduler_fromobject(t_object* x) { return nullptr; }
 
     MOCK_EXPORT short systhread_ismainthread(void) {
