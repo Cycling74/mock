@@ -134,6 +134,10 @@ namespace max {
         return nullptr;
     }
 
+    MOCK_EXPORT t_class *class_findbyname(t_symbol *name_space, t_symbol *classname) {
+        return nullptr;
+    }
+
     MOCK_EXPORT t_max_err class_sticky(t_class* x, t_symbol* stickyname, t_symbol* s, t_object* o) {
         return 0;
     }

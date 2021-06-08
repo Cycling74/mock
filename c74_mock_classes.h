@@ -239,6 +239,15 @@ MOCK_EXPORT method zgetfn(t_object *op, t_symbol *msg)
     return (*messlist)[msg->s_name];
 }
 
+MOCK_EXPORT void *object_method_imp(void *x, void *sym, void *p1, void *p2, void *p3, void *p4, void *p5, void *p6, void *p7, void *p8)
+{
+    return nullptr;
+}
+
+MOCK_EXPORT void *object_method(void *x, t_symbol *s, ...) {
+    return nullptr;
+}
+
 
 inline void* object_method(t_object* target_object, t_symbol* method_name, void* arg1, void* arg2, void* arg3, void* arg4, void* arg5) {
     method m = zgetfn(target_object, method_name);
