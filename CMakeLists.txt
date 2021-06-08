@@ -30,8 +30,6 @@ endif ()
 
 
 if (APPLE)
-	#set(CMAKE_OSX_ARCHITECTURES x86_64;i386)
-	set(CMAKE_OSX_ARCHITECTURES x86_64)
 	set(CMAKE_MACOSX_RPATH 1)
 endif ()
 
