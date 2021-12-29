@@ -27,23 +27,15 @@
 #if !defined(WIN_VERSION) && !defined(MAC_VERSION)
     #ifdef __APPLE__
         #define MAC_VERSION
-    #else
+    #elif defined(_MSC_VER)
         #define WIN_VERSION
     #endif
 #endif  // #if !defined(MAC_VERSION) && !defined(WIN_VERSION)
 
 // 64-bit detection
-#ifdef WIN_VERSION
-    #ifdef _WIN64
-        #define C74_X64
-    #endif
-#endif  // #ifdef WIN_VERSION
-
-#ifdef MAC_VERSION
-    #if __LP64__
-        #define C74_X64
-    #endif
-#endif // #ifdef MAC_VERSION
+#if __LP64__ || defined(_WIN64)
+  #define C74_X64
+#endif
 
 #ifdef WIN_VERSION
     #ifndef snprintf
