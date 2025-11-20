@@ -1,7 +1,7 @@
 # Copyright 2018 The Min-API Authors. All rights reserved.
 # Use of this source code is governed by the MIT License found in the License.md file.
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 if (NOT DEFINED C74_MOCK_TARGET_DIR)
 	set(C74_MOCK_TARGET_DIR .)
