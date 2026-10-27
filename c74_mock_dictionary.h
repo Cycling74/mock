@@ -10,8 +10,25 @@ namespace max {
 
     using t_dictionary = t_object;
 
+    /// Dictionaries registered by name. Entries are not removed when a dictionary is freed.
+    static std::unordered_map<t_symbol*, t_dictionary*> g_mock_registered_dictionaries;
+
+    /// Number of dictobj_release() calls, so tests can tell it apart from object_free().
+    static long g_mock_dictobj_release_count = 0;
+
+    MOCK_EXPORT long mock_dictobj_release_count() {
+        return g_mock_dictobj_release_count;
+    }
+
     MOCK_EXPORT t_dictionary* dictobj_findregistered_retain(t_symbol* name) {
-        return nullptr;
+        auto registered = g_mock_registered_dictionaries.find(name);
+        if (registered == g_mock_registered_dictionaries.end())
+            return nullptr;
+        auto refcount = g_mock_refcounts.find(registered->second);
+        if (refcount == g_mock_refcounts.end())
+            return nullptr;
+        ++refcount->second;
+        return registered->second;
     }
 
     /// Dictionaries are the only reference counted mock objects, so a counted object is a dictionary.
@@ -20,7 +37,8 @@ namespace max {
     }
 
     MOCK_EXPORT t_max_err dictobj_release(t_dictionary* d) {
-        return 0;
+        ++g_mock_dictobj_release_count;
+        return object_free(d);
     }
 
     MOCK_EXPORT t_dictionary* dictionary_new(void) {
@@ -58,6 +76,8 @@ namespace max {
     }
 
     MOCK_EXPORT t_dictionary* dictobj_register(t_dictionary* d, t_symbol** name) {
+        if (*name)
+            g_mock_registered_dictionaries[*name] = d;
         return d;
     }
 
