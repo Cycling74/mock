@@ -19,7 +19,9 @@ namespace max {
     }
 
     MOCK_EXPORT t_dictionary* dictionary_new(void) {
-        return nullptr;
+        auto d = static_cast<t_dictionary*>(calloc(1, sizeof(t_dictionary)));
+        g_mock_refcounts[d] = 1;
+        return d;
     }
 
     MOCK_EXPORT t_max_err dictionary_getatoms(t_dictionary* d, t_symbol* key, long* argc, t_atom** argv) {
@@ -51,7 +53,7 @@ namespace max {
     }
 
     MOCK_EXPORT t_dictionary* dictobj_register(t_dictionary* d, t_symbol** name) {
-        return nullptr;
+        return d;
     }
 
 
@@ -69,6 +71,7 @@ namespace max {
     }
 
     MOCK_EXPORT t_max_err dictobj_dictionaryfromatoms(t_dictionary** d, const long argc, const t_atom* argv) {
+        *d = dictionary_new();
         return 0;
     }
 

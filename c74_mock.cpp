@@ -223,7 +223,10 @@ namespace max {
     MOCK_EXPORT void quittask_remove2(method m, void* a) {}
 
 
-    MOCK_EXPORT t_max_err object_retain(t_object*) {
+    MOCK_EXPORT t_max_err object_retain(t_object* x) {
+        auto refcount = g_mock_refcounts.find(x);
+        if (refcount != g_mock_refcounts.end())
+            ++refcount->second;
         return 0;
     }
 

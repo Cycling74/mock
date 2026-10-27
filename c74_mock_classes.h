@@ -185,6 +185,18 @@ namespace max {
 }
 
 
+/// Reference counts of mock objects that support object_retain(), such as dictionaries.
+/// Objects absent from the map are not reference counted.
+static std::unordered_map<t_object*, long> g_mock_refcounts;
+
+
+/// Current reference count of a mock object, or 0 if it has been freed or was never counted.
+MOCK_EXPORT long mock_refcount(void* x) {
+    auto refcount = g_mock_refcounts.find(static_cast<t_object*>(x));
+    return refcount == g_mock_refcounts.end() ? 0 : refcount->second;
+}
+
+
 /**	Free an instance of a #t_class.
     This mocks the behavior of Max's real object_alloc().
 
@@ -196,6 +208,16 @@ namespace max {
  */
 MOCK_EXPORT t_max_err object_free(void *x) {
     auto o = (t_object*)x;
+
+    auto refcount = g_mock_refcounts.find(o);
+    if (refcount != g_mock_refcounts.end()) {
+        if (--refcount->second == 0) {
+            g_mock_refcounts.erase(refcount);
+            free(x);
+        }
+        return 0;
+    }
+
     if (o && o->o_magic == OB_MAGIC) {
         t_mock_messlist *mock_messlist = (t_mock_messlist*)o->o_messlist;
         t_class			*c = (t_class *) ((*mock_messlist)["###CLASS###"]);
