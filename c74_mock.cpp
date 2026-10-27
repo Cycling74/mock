@@ -216,6 +216,12 @@ namespace max {
         return 0;
     }
 
+    MOCK_EXPORT void quittask_install(method m, void* a) {}
+
+    MOCK_EXPORT void quittask_remove(method m) {}
+
+    MOCK_EXPORT void quittask_remove2(method m, void* a) {}
+
 
     MOCK_EXPORT t_max_err object_retain(t_object*) {
         return 0;
