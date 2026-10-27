@@ -14,6 +14,11 @@ namespace max {
         return nullptr;
     }
 
+    /// Dictionaries are the only reference counted mock objects, so a counted object is a dictionary.
+    MOCK_EXPORT long atomisdictionary(t_atom* a) {
+        return a->a_type == A_OBJ && g_mock_refcounts.count(a->a_w.w_obj);
+    }
+
     MOCK_EXPORT t_max_err dictobj_release(t_dictionary* d) {
         return 0;
     }
