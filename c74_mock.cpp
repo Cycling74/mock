@@ -165,6 +165,57 @@ namespace max {
         return 0;
     }
 
+    // Returns x unchanged because callers must use the returned pointer in place of the one they registered.
+    MOCK_EXPORT void* object_register(t_symbol* name_space, t_symbol* s, void* x) {
+        return x;
+    }
+
+    MOCK_EXPORT t_symbol* object_register_unique(t_symbol* name_space, t_symbol* s, void* x) {
+        return s;
+    }
+
+    MOCK_EXPORT t_max_err object_unregister(void* x) {
+        return 0;
+    }
+
+    MOCK_EXPORT void* object_findregistered(t_symbol* name_space, t_symbol* s) {
+        return nullptr;
+    }
+
+    MOCK_EXPORT t_max_err object_findregisteredbyptr(t_symbol** name_space, t_symbol** s, void* x) {
+        return 1;
+    }
+
+    MOCK_EXPORT t_max_err object_register_getnames(t_symbol* name_space, long* namecount, t_symbol*** names) {
+        *namecount = 0;
+        *names = nullptr;
+        return 0;
+    }
+
+    MOCK_EXPORT void* object_attach(t_symbol* name_space, t_symbol* s, void* x) {
+        return nullptr;
+    }
+
+    MOCK_EXPORT t_max_err object_detach(t_symbol* name_space, t_symbol* s, void* x) {
+        return 0;
+    }
+
+    MOCK_EXPORT t_max_err object_attach_byptr(void* x, void* registeredobject) {
+        return 0;
+    }
+
+    MOCK_EXPORT t_max_err object_detach_byptr(void* x, void* registeredobject) {
+        return 0;
+    }
+
+    MOCK_EXPORT void* object_subscribe(t_symbol* name_space, t_symbol* s, t_symbol* classname, void* x) {
+        return nullptr;
+    }
+
+    MOCK_EXPORT t_max_err object_unsubscribe(t_symbol* name_space, t_symbol* s, t_symbol* classname, void* x) {
+        return 0;
+    }
+
 
     MOCK_EXPORT t_max_err object_retain(t_object*) {
         return 0;
